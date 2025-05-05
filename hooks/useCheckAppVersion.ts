@@ -11,19 +11,24 @@ export default function useCheckAppVersion() {
   const [version, setVersion] = useState<number>(0);
   const [loading, setLoading] = useState(false);
 
-  // lê a versão atual (retornada pelo plugin após último update)
+  // lê a versão atual armazenada pelo plugin
   useEffect(() => {
     hotUpdate.getCurrentVersion().then(setVersion);
   }, []);
 
   const onCheckVersion = async () => {
     setLoading(true);
+
     try {
       const res = await fetch(UPDATE_JSON_URL);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const update = await res.json();
 
-      const remoteVersion = update.version as number;
+      const {
+        version: remoteVersion,
+        downloadAndroidUrl,
+        downloadIosUrl,
+      } = await res.json();
+
       if (remoteVersion <= version) {
         Alert.alert("Já está atualizado", `Versão atual: ${version}`);
         setLoading(false);
@@ -31,40 +36,52 @@ export default function useCheckAppVersion() {
       }
 
       const downloadUrl =
-        Platform.OS === "ios"
-          ? update.downloadIosUrl
-          : update.downloadAndroidUrl;
+        Platform.OS === "ios" ? downloadIosUrl : downloadAndroidUrl;
 
       Alert.alert(
         "Nova versão disponível",
         `Atualização v${remoteVersion} encontrada.\nDeseja baixar agora?`,
         [
-          { text: "Cancelar", style: "cancel", onPress: () => setLoading(false) },
+          {
+            text: "Cancelar",
+            style: "cancel",
+            onPress: () => setLoading(false),
+          },
           {
             text: "Atualizar",
             onPress: () => {
-              hotUpdate
-                .downloadBundleUri(
-                  ReactNativeBlobUtil,
-                  downloadUrl,
-                  remoteVersion,
-                  {
-                    updateSuccess: () =>
-                      Alert.alert("Atualizado!", "Reinicie o app."),
-                    restartAfterInstall: true,
-                  }
-                )
-                .catch((e) =>
-                  Alert.alert("Erro ao atualizar", e.message)
-                )
-                .finally(() => setLoading(false));
+              hotUpdate.downloadBundleUri(
+                ReactNativeBlobUtil,
+                downloadUrl,
+                remoteVersion,
+                {
+                  // disparado após aplicar o bundle com sucesso
+                  updateSuccess: () => {
+                    setLoading(false);
+                    Alert.alert("Atualizado!", "Reinicie o app.");
+                  },
+                  // disparado em caso de falha no download/unzip
+                  updateFail: (message: string) => {
+                    setLoading(false);
+                    Alert.alert("Erro ao atualizar", message);
+                  },
+                  // reinicia automaticamente após instalar
+                  restartAfterInstall: true,
+                  // callback de progresso do download
+                  progress: (received, total) =>
+                    console.log(
+                      `Download progress: ${((received / total) * 100).toFixed(0)}%`
+                    ),
+                  // headers, extensionBundle, restartDelay, etc. também podem ser configurados aqui
+                }
+              );
             },
           },
         ]
       );
     } catch (e: any) {
-      Alert.alert("Erro ao verificar atualização", e.message);
       setLoading(false);
+      Alert.alert("Erro ao verificar atualização", e.message);
     }
   };
 
