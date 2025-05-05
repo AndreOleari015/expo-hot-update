@@ -1,5 +1,5 @@
 {
-    "version": 1,
+    "version": 2,
     "downloadAndroidUrl": "https://raw.githubusercontent.com/AndreOleari015/expo-hot-update/main/index.android.bundle.zip",
     "downloadIosUrl":     "https://raw.githubusercontent.com/AndreOleari015/expo-hot-update/main/main.jsbundle.zip"
   }

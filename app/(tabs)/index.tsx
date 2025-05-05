@@ -11,7 +11,7 @@ export default function Home() {
         >
             <Text>Versão atual: {version}</Text>
             <Button
-                title={loading ? "Verificando…" : "Verificar Atualização"}
+                title={loading ? "Verificando…" : "Atualização"}
                 onPress={onCheckVersion}
                 disabled={loading}
             />
