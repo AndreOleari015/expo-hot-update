@@ -4,7 +4,7 @@ import { Alert, Platform } from "react-native";
 import ReactNativeBlobUtil from "react-native-blob-util";
 import hotUpdate from "react-native-ota-hot-update";
 
-const updateJsonUrl = "https://seu-bucket.com/hotupdate/update.json";
+const updateJsonUrl = "https://github.com/AndreOleari015/expo-hot-update/blob/main/update.json";
 
 export default function useCheckAppVersion() {
   const [version, setVersion] = useState<number>(0);
