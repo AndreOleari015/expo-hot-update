@@ -15,6 +15,7 @@ export default function Home() {
                 onPress={onCheckVersion}
                 disabled={loading}
             />
+            <Text>Nova atualização de tela</Text>
         </View>
     );
 }

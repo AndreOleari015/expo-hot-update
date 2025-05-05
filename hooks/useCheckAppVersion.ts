@@ -28,7 +28,7 @@ export default function useCheckAppVersion() {
         downloadAndroidUrl,
         downloadIosUrl,
       } = await res.json();
-
+      console.log(remoteVersion)
       if (remoteVersion <= version) {
         Alert.alert("Já está atualizado", `Versão atual: ${version}`);
         setLoading(false);
