@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <View style={{ flex:1, justifyContent:"center", alignItems:"center" }}>
       <Text>Versão atual: {version}</Text>
-      <Button title="Verificar Atualizaço" onPress={onCheckVersion} />
+      <Button title="Verificar Atualização" onPress={onCheckVersion} />
     </View>
   );
 }
