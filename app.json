@@ -1,0 +1,60 @@
+{
+    "expo": {
+        "name": "expo-hot-update",
+        "slug": "expo-hot-update",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/icon.png",
+        "scheme": "expohotupdate",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": true,
+        "splash": {
+            "image": "./assets/images/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.usaq.expo-hot-update"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "edgeToEdgeEnabled": true
+        },
+        "web": {
+            "bundler": "metro",
+            "output": "static",
+            "favicon": "./assets/images/favicon.png"
+        },
+        "plugins": [
+            "react-native-ota-hot-update",
+            [
+                "expo-build-properties",
+                {
+                    "ios": {
+                        "useFrameworks": "static",
+                        "enableNewArch": true,
+                        "hermesEnabled": true
+                    },
+                    "android": {
+                        "enableNewArch": true,
+                        "enableProguardInReleaseBuilds": true
+                    }
+                }
+            ],
+            ["expo-dev-client"],
+            ["expo-file-system"]
+        ],
+        "experiments": {
+            "typedRoutes": true
+        },
+        "extra": {
+            "eas": {
+                "projectId": "db8d9049-f580-4a6c-8f70-d07327b41c19"
+            }
+        }
+    }
+}
