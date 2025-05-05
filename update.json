@@ -1,5 +1,5 @@
 {
     "version": 1,
     "downloadAndroidUrl": "https://raw.githubusercontent.com/AndreOleari015/expo-hot-update/main/output/index.android.bundle.zip",
-    "downloadIosUrl":     "https://raw.githubusercontent.com/AndreOleari015/expo-hot-update/main/ios/output/main.jsbundle.zip"
+    "downloadIosUrl":     "https://firebasestorage.googleapis.com/v0/b/agrozapdb-38625.firebasestorage.app/o/main.jsbundle.zip?alt=media&token=15f755af-3cb6-4195-bc30-b11321de1874"
   }

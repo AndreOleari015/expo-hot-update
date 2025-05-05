@@ -11,8 +11,9 @@
         "bundle:ios": "npx react-native bundle --platform ios --dev false --entry-file index.js --bundle-output output/main.jsbundle --assets-dest output/assets",
         "bundle:android": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output output/index.android.bundle --assets-dest output/assets",
         "bundle:all": "npm run bundle:ios && npm run bundle:android",
-        "export-android": "mkdir -p android/output && npx expo export:embed --platform android --entry-file node_modules/expo/AppEntry.js --bundle-output android/output/index.android.bundle --dev false --assets-dest android/output --sourcemap-output android/sourcemap.js && cd android && find output -type f | zip index.android.bundle.zip -@ && zip sourcemap.zip sourcemap.js && cd .. && rm -rf android/output && rm -rf android/sourcemap.js",
-        "export-ios": "mkdir -p ios/output && npx expo export:embed --platform ios --entry-file index.js --bundle-output ios/output/main.jsbundle --dev false --assets-dest ios/output --sourcemap-output ios/sourcemap.js && cd ios && find output -type f | zip main.jsbundle.zip -@ && zip sourcemap.zip sourcemap.js && cd .. && rm -rf ios/output && rm -rf ios/sourcemap.js"
+        "export:android": "mkdir -p output/android && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output output/android/index.android.bundle --assets-dest output/android && cd output && zip -r index.android.bundle.zip android && mv index.android.bundle.zip .. && cd .. && rm -rf output",
+        "export:ios": "mkdir -p output/ios && npx react-native bundle --platform ios --dev false --entry-file index.js --bundle-output output/ios/main.jsbundle --assets-dest output/ios && cd output && zip -r main.jsbundle.zip ios && mv main.jsbundle.zip .. && cd .. && rm -rf output",
+        "export:all": "npm run export:android && npm run export:ios"
     },
     "jest": {
         "preset": "jest-expo"
