@@ -1,0 +1,5 @@
+
+project_id = "woleemeyglbcsepazguk"
+
+[db.seed]
+enabled = false
