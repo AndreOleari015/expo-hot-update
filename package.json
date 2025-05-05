@@ -10,7 +10,9 @@
         "test": "jest --watchAll",
         "bundle:ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output output/main.jsbundle --assets-dest output/assets",
         "bundle:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output output/index.android.bundle --assets-dest output/assets",
-        "bundle:all": "npm run bundle:ios && npm run bundle:android"
+        "bundle:all": "npm run bundle:ios && npm run bundle:android",
+        "export-android": "mkdir -p android/output && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/output/index.android.bundle --assets-dest android/output && cd android && zip -r index.android.bundle.zip output && cd .. && rm -rf android/output",
+        "export-ios": "mkdir -p ios/output    && react-native bundle --platform ios     --dev false --entry-file index.js --bundle-output ios/output/main.jsbundle    --assets-dest ios/output && cd ios    && zip -r main.jsbundle.zip    output && cd .. && rm -rf ios/output"
     },
     "jest": {
         "preset": "jest-expo"
